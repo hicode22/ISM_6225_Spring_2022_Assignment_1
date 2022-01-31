@@ -90,8 +90,31 @@ namespace DIS_Assignmnet1_SPRING_2022
             try
             {
                 // write your code here
-                String final_string ="";
+                char[] given = new char[10000];
+                // giving char limit
+                int count = 0;
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    //checking if its a vowel
+                    if (Convert.ToChar(s[i]) != 'a' && Convert.ToChar(s[i]) != 'e' && Convert.ToChar(s[i]) != 'i' && Convert.ToChar(s[i]) != 'o' && Convert.ToChar(s[i]) != 'u' && Convert.ToChar(s[i]) != 'A' && Convert.ToChar(s[i]) != 'E' && Convert.ToChar(s[i]) != 'I' && Convert.ToChar(s[i]) != 'O' && Convert.ToChar(s[i]) != 'U')
+                    {
+                        given[count] = s[i];
+                        count++;
+                        //letters that are not vowels are added
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                string tem = new string(given);
+                String final_string = "";
+                final_string = tem;
                 return final_string;
+                //edge case - even empty or null is given same will be returned
+                //concept learned - adding new char to existing one and converting string to char
             }
             catch (Exception)
             {
@@ -123,17 +146,46 @@ namespace DIS_Assignmnet1_SPRING_2022
 
         private static bool ArrayStringsAreEqual(string[] bulls_string1, string[] bulls_string2)
         {
+            string bs1 = "";
+            string bs2 = "";
             try
             {
                 // write your code here.
-                return false;
+
+
+                for (int i = 0; i < bulls_string1.Length; i++)
+                {
+                    bs1 += bulls_string1[i];
+                    //adding all words to one string bs1
+
+                }
+
+                for (int i = 0; i < bulls_string2.Length; i++)
+                {
+                    bs2 += bulls_string2[i];
+                    //adding all second array words to bs2
+                }
+                //checking if both compiled strings are same
+                if (bs1 == bs2)
+                  
+                {
+                    return true;
+                }
+
+                else
+                {
+                    return false;
+                }
+                
+
             }
             catch (Exception)
             {
 
                 throw;
             }
-
+            //edge cases- nulls, empty are taken care 
+            //learned concatination and also string comparision - when small and caps are checked its not same
         }
         /*
         <summary> 
@@ -156,16 +208,47 @@ namespace DIS_Assignmnet1_SPRING_2022
 
         private static int SumOfUnique(int[] bull_bucks)
         {
+            int count = 0;
+            int sum = 0;
+
             try
             {
                 // write your code here
-                return 0;
-
+                //checking how many times the element is
+                //if the element is different count increases
+                //when count is equal to total no of elements - 1 -> because element is equal to itself 
+                //based on count we can say if element is unique
+                // if unique adds to sum
+                for (int i = 0; i < bull_bucks.Length; i++)
+                {
+                    count = 0;
+                    //when ever i changes count refreshes to 0
+                    
+                    for (int j = 0; j < bull_bucks.Length; j++)
+                    {
+                        if (bull_bucks[i] != bull_bucks[j])
+                        {
+                            count++;
+                            if (count == bull_bucks.Length - 1)
+                            {
+                                sum += bull_bucks[i];
+                                count = 0;
+                            }
+                        }
+                    }
+                }
+                return sum;
             }
             catch (Exception)
             {
                 throw;
             }
+            //learned counter concept to check unique
+            //only when all elements are checked sum is added
+            //edge cases like when all same elements,none, are checked
+
+
+
         }
         /*
 
@@ -194,7 +277,37 @@ namespace DIS_Assignmnet1_SPRING_2022
             {
                 // write your code here.
 
-                return 0;
+                int size = bulls_grid.GetLength(0);
+                int add = 0, mid;
+
+                //in primary diagonal i and j will be same
+                for (int i = 0; i < size; i++)
+                {
+                    add += bulls_grid[i, i];
+
+                }
+                //in secondary diagonal i keeps increasing by one from starting and j decreases by one from end
+                for (int i = 0; i < size; i++)
+                {
+                    for (int j = size - 1; j >= 0; j--)
+                    {
+                        add += bulls_grid[i, j];
+                        i++;
+                    }
+                }
+                //if its a odd number square matrix middle element is added twice above so we remove one time
+                if (size % 2 != 0 && size > 1)
+                {
+                    mid = (size - 1) / 2;
+                    add = add - bulls_grid[mid, mid];
+                }
+                //edge case when only 1 element is there
+                // learned square matrx 2d array iteration i,j and adding and subtraction of req elements
+
+                return add;
+
+
+
             }
             catch (Exception e)
             {
@@ -225,7 +338,20 @@ namespace DIS_Assignmnet1_SPRING_2022
             try
             {
                 // write your code here.
-                return "null";
+
+                char[] res = new char[100];
+                // simply assigning the respective element to new string and then final res converted and returned
+                for (int i = 0; i < bulls_string.Length; i++)
+                    
+                {
+                    res[indices[i]] = bulls_string[i];
+                }
+                string final = new string(res);
+
+                return final;
+                //learned indexing and assigning elements in array
+                //edge cases when nulls are present
+
             }
             catch (Exception e)
             {
@@ -264,12 +390,25 @@ namespace DIS_Assignmnet1_SPRING_2022
         {
             try
             {
-                String prefix_string ="";
+                //identifying the index of the ch element
+                int ind = bulls_string6.IndexOf(ch);
+                string outres = "";
+                //based on position of ch outres is appended from reverse
+                for (int i = ind; i >= 0; i--)
+                {
+                    outres += bulls_string6[i];
+                }
+                //now after ch index outres is normally appended
+                for (int i = ind + 1; i < bulls_string6.Length; i++)
+                {
+                    outres += bulls_string6[i];
+                }
+                //final outres is retured in string
+                String prefix_string = outres;
                 return prefix_string;
             }
             catch (Exception)
             {
-
                 throw;
             }
 
